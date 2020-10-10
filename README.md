@@ -33,6 +33,10 @@ Final year Capstone Project
   - Histogram (/group counts) calculation 
   - Extracting the resulting pitch 
 - Real-time pitch detection framework is ready in MATLAB 
+
+# Libraries :
+  - Major : Parselmouth, Sounddevice, Collections
+  - Minor : Matplotlib, Math, Numpy, Scipy, Time
  
 # Challenges:  
 - The execution time (on average) is 3~4 seconds for 1s of audio input. This would really make it difficult for real time implementation. 
