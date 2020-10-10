@@ -1,6 +1,7 @@
 # Musical-Instrument-Tuning-Assistant
 Final year Capstone Project
-General Overview:  
+
+# General Overview:  
 INPUT 
 MODE:  
 Input method: using Push buttons (toggle b/w a and b modes) 
@@ -19,29 +20,29 @@ OUTPUTS
 Target pitch and real time pitch accuracy display on the LCD. 
 Synthesized Sound will be played from the Speaker to tune the specified user Instrument. 
  
-Algorithm: 
-Audio I/O 
-Signal-to-Noise ratio estimation 
-Pitch contour generation (and plotting, if needed) 
-Denoising pitch contour to remove abrupt variations 
-Initial pitch estimate 
-Denoising the pitch contour generated based on initial pitch estimate 
-Histogram (/group counts) calculation 
-Extracting the resulting pitch 
+# Algorithm: 
+- Audio I/O 
+- Signal-to-Noise ratio estimation 
+- Pitch contour generation (and plotting, if needed) 
+- Denoising pitch contour to remove abrupt variations 
+- Initial pitch estimate 
+- Denoising the pitch contour generated based on initial pitch estimate 
+- Histogram (/group counts) calculation 
+- Extracting the resulting pitch 
  
-Progress:  
-Pitch detection framework is ready (in Python and MATLAB) 
-Audio I/O 
-Signal-to-Noise ratio estimation 
-Pitch contour generation (and plotting, if needed) 
-Denoising the pitch contour generated  
-Histogram (/group counts) calculation 
-Extracting the resulting pitch 
-Real-time pitch detection framework is ready in MATLAB 
+# Progress:  
+- Pitch detection framework is ready (in Python and MATLAB) 
+  - Audio I/O 
+  - Signal-to-Noise ratio estimation 
+  - Pitch contour generation (and plotting, if needed) 
+  - Denoising the pitch contour generated  
+  - Histogram (/group counts) calculation 
+  - Extracting the resulting pitch 
+- Real-time pitch detection framework is ready in MATLAB 
  
-Challenges:  
-The execution time (on average) is 3~4 seconds for 1s of audio input. This would really make it difficult for real time implementation. 
-The SNR calculation is not clear (unlike MATLAB) 
-On average the pitch estimate has a deviation from ideal result of about 1Hz. Though small, we want to reduce this error. 
-Identifying different Octaves and Swaras (Sa, Pa, Sa#) 
+# Challenges:  
+- The execution time (on average) is 3~4 seconds for 1s of audio input. This would really make it difficult for real time implementation. 
+- The SNR calculation is not clear (unlike MATLAB) 
+- On average the pitch estimate has a deviation from ideal result of about 1Hz. Though small, we want to reduce this error. 
+- Identifying different Octaves and Swaras (Sa, Pa, Sa#) 
  
