@@ -8,7 +8,7 @@ Created on Sat Oct 10 17:47:49 2020
 import pyaudio
 import wave
 
-def record():
+def record(duration):
     # the file name output you want to record into
     filename = "recorded.wav"
     # set the chunk size of 1024 samples
@@ -19,7 +19,7 @@ def record():
     channels = 1
     # 44100 samples per second
     sample_rate = 44100
-    record_seconds = 1
+    record_seconds = duration
     # initialize PyAudio object
     p = pyaudio.PyAudio()
     # open stream object as input & output

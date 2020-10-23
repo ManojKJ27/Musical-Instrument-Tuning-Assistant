@@ -63,23 +63,38 @@ This is a temporary script file.
 #     # plt.xlim([snd.xmin, snd.xmax])
 #     # plt.show() # or plt.savefig("spectrogram.pdf")
 
-# from time import time
 import parselmouth
-# import matplotlib.pyplot as plt
-from numpy import mean, log
+import matplotlib.pyplot as plt
+from numpy import mean, log, std
 from numpy import abs as npabs
 from denoise import denoise
-# import sounddevice as sd
-# from scipy.io.wavfile import write
 from collections import Counter
 from math import floor
 from record import record
-from SNR import snr
-
+# from SNR import snr
+from denoise_classic import denoise_classic
+from scipy.io import wavfile as wv
+import numpy as np
+from scipy.signal import periodogram as pdgm
+# import sounddevice as sd
+# from scipy.io.wavfile import write
 
 # tick = time() 
 # i = 0
 def pitch():
+    def draw_pitch(pitch):
+    # Extract selected pitch contour
+
+            pitch_values = pitch.selected_array['frequency']
+        
+    # Plot the pitch contour
+        # plt.plot(pitch.xs(), pitch_values)#, 'o', markersize=2)
+        # plt.grid(False)
+        # plt.ylim(0, pitch.ceiling)
+        # plt.ylabel("fundamental frequency [Hz]")
+        # plt.show()
+        
+            return pitch_values
     
 # fs = 44100  # this is the sampling frequency
 # seconds = 1  # Duration of recording
@@ -91,37 +106,45 @@ def pitch():
 
 # write('recorded.wav', fs, myrecording)  # Save as WAV file
 
-    record()
-
+    record(2)
+    fs, data = wv.read('recorded.wav')
+    # freqs = np.fft.rfft(data)
+    # autocorr = np.fft.irfft(freqs * np.conj(freqs))
+    # data = np.array(data,dtype=float)
+    # lags,c,line,b = plt.acorr(data)
+    # plt.plot(freqs)
+    # plt.plot(lags,c)
+    f,pxx = pdgm(data,fs)
+    plt.xlabel('frequency [Hz]')
+    plt.ylabel('PSD')
+    plt.ylim([1e-1,1e5])
+    plt.xlim([0,5000])
+    plt.plot(f,pxx)
+    plt.show()
+    # wv.write('recorded.wav',fs,np.array(data))
     audio = parselmouth.Sound("recorded.wav")
+    # plt.plot(audio.values.T)
+    # plt.show()
+    # audio = denoise_classic(audio.values.T,10,1e-5)
+    # print(mean(npabs(audio)))
+    if (mean(npabs(audio.values.T))>1e-5):
+    
+    # print(audio)
+# """    
 # audio = parselmouth.Sound("/Users/manojjagannath/Desktop/PROJECT2/Veena/Sa_E.wav")
-    audio_snr = snr(audio,1,0)
+    # audio_snr = snr(audio,1,0)
     # print("SNR : ",audio_snr[0])
-    print("SNR (dB) : ",-20 * log(npabs(audio_snr[0])))
+    # print("SNR (dB) : ",-20 * log(npabs(audio_snr[0])))
 
-    def draw_pitch(pitch):
-    # Extract selected pitch contour
+        pitch = audio.to_pitch()
 
-        pitch_values = pitch.selected_array['frequency']
-        
-    # Plot the pitch contour
-        # plt.plot(pitch.xs(), pitch_values)#, 'o', markersize=2)
-        # plt.grid(False)
-        # plt.ylim(0, pitch.ceiling)
-        # plt.ylabel("fundamental frequency [Hz]")
-        # plt.show()
-        
-        return pitch_values
-
-    pitch = audio.to_pitch()
-
-    output = 0
-    result = 0
-    output = draw_pitch(pitch)
+        output = 0
+        result = 0
+        output = draw_pitch(pitch)
     # print("Output : ",output)
-    result = denoise(output,1,20,520)
-    for i in range(0,len(result)) : 
-            result[i] = floor(result[i])
+        result = denoise(output,1,20,520)
+        for i in range(0,len(result)) : 
+                result[i] = floor(result[i])
     # print("Result : ",result)
     
     # checknan = 0
@@ -129,31 +152,30 @@ def pitch():
     #     if (isnan(i)):
     #         checknan += 1
     # print("Checknan : ",checknan)
-    cnt = Counter(result)
-    keys = []
-    values = []
-    for key in cnt :
-        keys.append(key)
-        values.append(cnt[key])
+        cnt = Counter(result)
+        keys = []
+        values = []
+        for key in cnt :
+            keys.append(key)
+            values.append(cnt[key])
         
-    print("Frequency : ", keys)
-    print("Occurances : ", values)
-    print("Max value : ",max(values))
+    # print("Frequency : ", keys)
+    # print("Occurances : ", values)
+    # print("Max value : ",max(values))
     
-    if(len(values) and max(values)>1):
-        pitch_mean = mean(result)
-        pitch_count = keys[values.index(max(values))]
-        print("Pitch : ",pitch_mean)
-        print("Pitch : ",pitch_count)
-        print ("ERROR : ",npabs(pitch_mean-pitch_count))
-
-    # tock = time() # Stop clock
-    # print("Execution time : ",tock-tick)
-    else :
-        print("No Pitch")
-
-    # i = i+1
-
+        if(len(values) and max(values)>1):
+        # print("Standard Deviation : ",std(result))
+        # if(std(result)<10):
+        #     pitch_mean = mean(result)
+        # else:
+        #     pitch_mean = 0
+            pitch_count = keys[values.index(max(values))]
+        # print("Pitch : ",pitch_mean)
+            print("Pitch : ",pitch_count)
+        # print ("ERROR : ",npabs(pitch_mean-pitch_count))
+        else :
+            print()
 
 
+# """
 
