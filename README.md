@@ -40,9 +40,9 @@ Team : Manoj, Vamshi, Abhijith
 - Real-time pitch detection framework is ready in Python and MATLAB 
  
 # Challenges:  
-- [SOLVED] The execution time (on average) is 3~4 seconds for 1s of audio input. This would make it difficult for real time implementation. 
+- [SOLVED] The execution time (on average) is 3~4 seconds for 1s of audio input. This would make real time implementation difficult
 - Silence detection. The SNR calculation is not clear (unlike MATLAB) 
-- On average the pitch estimate has a deviation from ideal result of about 1Hz. Though small, we want to reduce this error. 
+- On average the pitch estimate has a deviation from ideal result of about 1Hz. Though small, we want to reduce this error
 - [SOLVED] Identifying different Octaves and Swaras (Sa, Pa, Sa#) 
 - Pitch estimation carried out even when there is no signal from instrument
 - Large deviation in pitch estimated. Though infrequent, we wish to eliminate the occurence of such results 
