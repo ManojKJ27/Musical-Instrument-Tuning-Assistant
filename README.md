@@ -18,29 +18,33 @@ Final year Capstone Project
 - Audio I/O 
 - Signal-to-Noise ratio estimation 
 - Pitch contour generation (and plotting, if needed) 
-- Denoising pitch contour to remove abrupt variations 
 - Initial pitch estimate 
+- Denoising pitch contour to remove abrupt variations 
 - Denoising the pitch contour generated based on initial pitch estimate 
 - Histogram (/group counts) calculation 
 - Extracting the resulting pitch 
+- Providing the information about the corrective action to be taken
  
 # Progress:  
 - Pitch detection framework is ready (in Python and MATLAB) 
   - Audio I/O 
-  - Signal-to-Noise ratio estimation 
+  - Signal-to-Noise ratio estimation (Not reliable)
   - Pitch contour generation (and plotting, if needed) 
+  - Initial pitch estimate
   - Denoising the pitch contour generated  
   - Histogram (/group counts) calculation 
   - Extracting the resulting pitch 
-- Real-time pitch detection framework is ready in MATLAB 
-
-# Libraries :
-  - Major : Parselmouth, Sounddevice, Collections
-  - Minor : Matplotlib, Math, Numpy, Scipy, Time
+  - Providing information on corrective action required
+- Real-time pitch detection framework is ready in Python and MATLAB 
  
 # Challenges:  
-- The execution time (on average) is 3~4 seconds for 1s of audio input. This would really make it difficult for real time implementation. 
-- The SNR calculation is not clear (unlike MATLAB) 
-- On average the pitch estimate has a deviation from ideal result of about 1Hz. Though small, we want to reduce this error. 
-- Identifying different Octaves and Swaras (Sa, Pa, Sa#) 
- 
+- [SOLVED] The execution time (on average) is 3~4 seconds for 1s of audio input. This would make real time implementation difficult
+- Silence detection. The SNR calculation is not clear (unlike MATLAB) 
+- On average the pitch estimate has a deviation from ideal result of about 1Hz. Though small, we want to reduce this error
+- [SOLVED] Identifying different Octaves and Swaras (Sa, Pa, Sa#) 
+- Pitch estimation carried out even when there is no signal from instrument
+- Large deviation in pitch estimated. Though infrequent, we wish to eliminate the occurence of such results 
+
+# Libraries :
+  - Major : Parselmouth, Sounddevice, Collections, PyAudio, Collections
+  - Minor : Matplotlib, Math, Numpy, Scipy, Time
