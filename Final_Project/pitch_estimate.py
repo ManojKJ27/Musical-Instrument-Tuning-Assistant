@@ -12,17 +12,20 @@ from scipy.io import wavfile as wv
 from collections import Counter
 from math import floor
 from record import record
-from numpy import mean
+# from numpy import mean,fft,conj,array,correlate
 from numpy import abs as npabs
-
+# from pitch_by_xcorr import pitch_by_xcorr
+# import librosa
+from correction import correction
+# from user_input import user_input
 
 # audio = parselmouth.Sound("/Users/manojjagannath/Desktop/PROJECT2/Veena/Sa_E.wav")
 
-def pitch():
+def pitch(targets):
     def draw_pitch(pitch):
     # Extract selected pitch contour
 
-            pitch_values = pitch.selected_array['frequency']
+        pitch_values = pitch.selected_array['frequency']
         
     # Plot the pitch contour
         # plt.plot(pitch.xs(), pitch_values)#, 'o', markersize=2)
@@ -31,13 +34,21 @@ def pitch():
         # plt.ylabel("fundamental frequency [Hz]")
         # plt.show()
         
-            return pitch_values
-        
-    record(2) # Record audio from the microphone for 2 seconds and store it as 'recorded.wav'
+        return pitch_values
+    
+    # targets = user_input()
+    
+    record(1) # Record audio from the microphone for 2 seconds and store it as 'recorded.wav'
     fs, data = wv.read('recorded.wav') # Read the recorded audio
-    audio = parselmouth.Sound("recorded.wav") #Convert it to a Parselmouth.Sound object for pitch estimation
+    audio = parselmouth.Sound("recorded.wav") # Convert it to a Parselmouth.Sound object for pitch estimation
+    energy = sum(npabs(audio.values.T)**2) # Energy of audio signal recorded
+    # plt.plot(audio.values.T)
+    # plt.show()
+    # estimate = pitch_by_xcorr(data)
+    # print("Xcorr : ",estimate)
+    
 
-    if (mean(npabs(audio.values.T))>1e-5): # Check if signal is prominent; to avoid processing silence
+    if (energy > 1e-1): # Check if signal is prominent; to avoid processing silence
         pitch = audio.to_pitch()
 
         # Reset output variables to enable continuos processing
@@ -45,7 +56,8 @@ def pitch():
         result = 0
         output = draw_pitch(pitch) # Get the pitch contour
 
-        result = denoise(output,1,20,520) # Remove the unwanted portions from the pitch contour
+        result, init_pitch = denoise(output,1) # Remove the unwanted portions from the pitch contour
+        
         for i in range(0,len(result)) : 
                 result[i] = floor(result[i]) # Limit precission for histogram analysis
     
@@ -57,9 +69,16 @@ def pitch():
             values.append(cnt[key])
             
         if(len(values) and max(values)>1): # Check for empty list and prominenence of frequency signature
-            pitch_count = keys[values.index(max(values))]
-            print("Pitch : ",pitch_count)
+            pitch_freq = keys[values.index(max(values))]
+            print("Pitch : ",pitch_freq," Hz")
+            # print("Number of occurences : ",max(values))  
+            # print("Initial_estimte : ",init_pitch)
+            # print("Difference : ", npabs(pitch_freq - init_pitch))
+            correction(pitch_freq,targets)
+            print()
         else :
             print()
+            
+        
 
 

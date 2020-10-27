@@ -7,13 +7,10 @@ Created on Sun Oct 11 15:19:02 2020
 """
 import numpy as np
 def movmean(y,ws):
-    y_mean_list = []
-    # y_series = pd.Series(y)
-    # windows = y_series.rolling(ws)
-    # y_mean = windows.mean()
-    # y_mean_list = y_mean.tolist()
+    # Find the Moving average of the pitch contour
     
-    start = 0; end = start + ws;
+    y_mean_list = []
+    start = 0; end = start + ws; # Set window parameters
     while(end<=len(y)):
         y_mean_list.append(np.mean(y[start:end]))
         start = end + 1

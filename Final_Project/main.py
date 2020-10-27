@@ -5,14 +5,18 @@ Created on Sat Oct 10 18:12:17 2020
 
 @author: manojjagannath
 """
-# from time import time
+# import time
 # import temp
 import pitch_estimate
+from user_input import user_input
+
+targets = user_input()
 i = 1
 while (i):
     # tick = time() 
     # temp.pitch()
-    pitch_estimate()
+    pitch_estimate.pitch(targets)
+    # time.sleep(1)
     # tock = time() # Stop clock
     # print("Execution time : ",tock-tick)
-    i = i+1
+    # i = i+1

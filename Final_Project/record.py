@@ -30,13 +30,13 @@ def record(duration):
                 output=True,
                 frames_per_buffer=chunk)
     frames = []
-    print("Recording...")
+    print("Listening...")
     for i in range(int(44100 / chunk * record_seconds)):
-        data = stream.read(chunk)
+        data = stream.read(chunk, exception_on_overflow = False)
     # if you want to hear your voice while recording
     # stream.write(data)
         frames.append(data)
-    print("Finished recording.")
+    # print("Finished recording.")
 # stop and close stream
     stream.stop_stream()
     stream.close()
