@@ -46,5 +46,5 @@ Final year Capstone Project
 - Large deviation in pitch estimated. Though infrequent, we wish to eliminate the occurence of such results 
 
 # Libraries :
-  - Major : Parselmouth, Sounddevice, Collections, PyAudio, Collections
+  - Major : Parselmouth, Sounddevice, Collections, PyAudio 
   - Minor : Matplotlib, Math, Numpy, Scipy, Time
