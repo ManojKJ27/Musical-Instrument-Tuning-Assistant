@@ -29,4 +29,6 @@ Team : Manoj, Vamshi, Abhijith
  
 # File to be executed : main.py
 
- 
+# Libraries :
+  - Major : Parselmouth, Sounddevice, Collections, PyAudio 
+  - Minor : Matplotlib, Math, Numpy, Scipy, Time
