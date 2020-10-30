@@ -1,6 +1,8 @@
-# Musical-Instrument-Tuning-Assistant : Program execution guide
-Final year Capstone Project;
+# Musical-Instrument-Tuning-Assistant : Program execution guide [Under development]
+Final year Capstone Project
+
 Guide : Dr.Venkatarangan
+
 Team : Manoj, Vamshi, Abhijith
 
 # Features:
