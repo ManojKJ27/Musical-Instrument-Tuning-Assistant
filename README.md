@@ -1,5 +1,10 @@
 # Musical-Instrument-Tuning-Assistant : Project Overview
+
 Final year Capstone Project
+
+Guide : Dr.M.J.Venkatarangan
+
+Team : Manoj, Vamshi, Abhijith
 
 # Features:  
 - INPUT : 
@@ -40,11 +45,10 @@ Final year Capstone Project
  
 # Challenges:  
 - [SOLVED] The execution time (on average) is 3~4 seconds for 1s of audio input. This would make real time implementation difficult
-- Silence detection. The SNR calculation is not clear (unlike MATLAB) 
+- [SOLVED] Silence detection. (Pitch estimation carried out even when there is no signal from instrument)
 - On average the pitch estimate has a deviation from ideal result of about 1Hz. Though small, we want to reduce this error
-- [SOLVED] Identifying different Octaves and Swaras (Sa, Pa, Sa#) 
-- Pitch estimation carried out even when there is no signal from instrument
-- Large deviation in pitch estimated. Though infrequent, we wish to eliminate the occurence of such results 
+- [SOLVED] Identifying different Octaves and Swaras (Sa, Pa, Sa#)
+- Infrequent large deviations in pitch estimated. Increased testing should help eliminate this issue
 - Cross validation with auto-correlation method failed due to inconsistency in auto-correlation results
 
 # Tasks pending:
