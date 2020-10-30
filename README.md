@@ -10,7 +10,8 @@ Final year Capstone Project
     - Pitch (/frequency) at which user wants to play the Music. 
   3. INSTRUMENT OF CHOICE 
   4. AUDIO FROM THE INSTRUMENT
-- OUTPUT
+  
+- OUTPUT :
   1. Target pitch and real time pitch accuracy display on the LCD. 
   2. Syntzhesized Sound will be played from the Speaker to tune the specified user Instrument. 
  
@@ -28,13 +29,14 @@ Final year Capstone Project
 # Progress:  
 - Real-time Pitch detection framework is ready (in Python and MATLAB) 
   - Audio I/O 
-  - Signal-to-Noise ratio estimation (Not reliable)
+  - Signal-to-Noise ratio estimation (Not reliable) (Replaced this with signal energy)
   - Pitch contour generation (and plotting, if needed) 
   - Initial pitch estimate
   - Denoising the pitch contour generated  
   - Histogram (/group counts) calculation 
   - Extracting the resulting pitch 
   - Providing information on corrective action required
+- Preliminary testing showed that the program works very well for veena and violin tuning
  
 # Challenges:  
 - [SOLVED] The execution time (on average) is 3~4 seconds for 1s of audio input. This would make real time implementation difficult
@@ -44,3 +46,9 @@ Final year Capstone Project
 - Pitch estimation carried out even when there is no signal from instrument
 - Large deviation in pitch estimated. Though infrequent, we wish to eliminate the occurence of such results 
 - Cross validation with auto-correlation method failed due to inconsistency in auto-correlation results
+
+# Tasks pending:
+1. Digital Tanpura
+2. GUI development
+3. Translating code to hardware compatible form
+4. Rigorous testing 
