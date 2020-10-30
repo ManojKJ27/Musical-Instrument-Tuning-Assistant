@@ -22,9 +22,9 @@ Team : Manoj, Vamshi, Abhijith
 - Audio I/O 
 - Signal-to-Noise ratio estimation 
 - Pitch contour generation (and plotting, if needed) 
-- Initial pitch estimate 
 - Denoising pitch contour to remove abrupt variations 
-- Denoising the pitch contour generated based on initial pitch estimate 
+- Generate the Initial pitch estimate 
+- Focus the pitch contour generated based on initial pitch estimate 
 - Histogram (/group counts) calculation 
 - Extracting the resulting pitch 
 - Providing the information about the corrective action to be taken
