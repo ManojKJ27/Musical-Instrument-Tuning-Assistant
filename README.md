@@ -26,7 +26,7 @@ Final year Capstone Project
 - Providing the information about the corrective action to be taken
  
 # Progress:  
-- Pitch detection framework is ready (in Python and MATLAB) 
+- Real-time Pitch detection framework is ready (in Python and MATLAB) 
   - Audio I/O 
   - Signal-to-Noise ratio estimation (Not reliable)
   - Pitch contour generation (and plotting, if needed) 
@@ -35,7 +35,6 @@ Final year Capstone Project
   - Histogram (/group counts) calculation 
   - Extracting the resulting pitch 
   - Providing information on corrective action required
-- Real-time pitch detection framework is ready in Python and MATLAB 
  
 # Challenges:  
 - [SOLVED] The execution time (on average) is 3~4 seconds for 1s of audio input. This would make real time implementation difficult
