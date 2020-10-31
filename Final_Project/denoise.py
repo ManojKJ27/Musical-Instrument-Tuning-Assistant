@@ -19,15 +19,18 @@ def denoise(y,ws,threshold_low=0,threshold_high=0):
         y_mean = movmean(y,ws) # Moving average of pitch contour
         y_mean = movdiff(y_mean) # Moving Fwd difference of averaged pitch contour
 
-        threshold_low = 50
-        threshold_high = 423
+        # threshold_low = 50
+        # threshold_high = 423
         
         initial_pitch_estimate = np.mean(y_mean)
         
-        if(initial_pitch_estimate>threshold_high):
-                threshold_high = initial_pitch_estimate + 2
-        if(initial_pitch_estimate <= threshold_low):
-                    threshold_low = initial_pitch_estimate - 2
+        threshold_low = initial_pitch_estimate - 50
+        threshold_high = initial_pitch_estimate + 50
+        
+        # if(initial_pitch_estimate>threshold_high):
+        #         threshold_high = initial_pitch_estimate + 2
+        # if(initial_pitch_estimate <= threshold_low):
+        #             threshold_low = initial_pitch_estimate - 2
                     
         for i in range(0,len(y_mean)):
             if (np.abs(y_mean[i]) <= threshold_high):
