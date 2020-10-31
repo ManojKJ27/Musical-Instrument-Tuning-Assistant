@@ -6,7 +6,7 @@ Created on Sun Oct  4 19:27:45 2020
 @author: manojjagannath
 """
 import parselmouth
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from denoise import denoise
 from scipy.io import wavfile as wv
 from collections import Counter
@@ -28,17 +28,17 @@ def pitch(targets):
         pitch_values = pitch.selected_array['frequency']
         
     # Plot the pitch contour
-        # plt.plot(pitch.xs(), pitch_values)#, 'o', markersize=2)
-        # plt.grid(False)
-        # plt.ylim(0, pitch.ceiling)
-        # plt.ylabel("fundamental frequency [Hz]")
-        # plt.show()
+        plt.plot(pitch.xs(), pitch_values)#, 'o', markersize=2)
+        plt.grid(False)
+        plt.ylim(0, pitch.ceiling)
+        plt.ylabel("fundamental frequency [Hz]")
+        plt.show()
         
         return pitch_values
     
     # targets = user_input()
     
-    record(1) # Record audio from the microphone for 2 seconds and store it as 'recorded.wav'
+    record(2) # Record audio from the microphone for 2 seconds and store it as 'recorded.wav'
     fs, data = wv.read('recorded.wav') # Read the recorded audio
     audio = parselmouth.Sound("recorded.wav") # Convert it to a Parselmouth.Sound object for pitch estimation
     energy = sum(npabs(audio.values.T)**2) # Energy of audio signal recorded
@@ -57,6 +57,12 @@ def pitch(targets):
         output = draw_pitch(pitch) # Get the pitch contour
 
         result, init_pitch = denoise(output,1) # Remove the unwanted portions from the pitch contour
+        # Plot the pitch contour
+        plt.plot(result)#, 'o', markersize=2)
+        plt.grid(False)
+        plt.ylim(0, pitch.ceiling)
+        plt.ylabel("fundamental frequency [Hz]")
+        plt.show()
         
         for i in range(0,len(result)) : 
                 result[i] = floor(result[i]) # Limit precission for histogram analysis
@@ -68,12 +74,15 @@ def pitch(targets):
             keys.append(key)
             values.append(cnt[key])
             
+        plt.bar(keys,values)
+        plt.show()
+        
         if(len(values) and max(values)>1): # Check for empty list and prominenence of frequency signature
             pitch_freq = keys[values.index(max(values))]
             print("Pitch : ",pitch_freq," Hz")
             # print("Number of occurences : ",max(values))  
-            # print("Initial_estimte : ",init_pitch)
-            # print("Difference : ", npabs(pitch_freq - init_pitch))
+            print("Initial_estimte : ",init_pitch)
+            print("Difference : ", npabs(pitch_freq - init_pitch))
             correction(pitch_freq,targets)
             print()
         else :
