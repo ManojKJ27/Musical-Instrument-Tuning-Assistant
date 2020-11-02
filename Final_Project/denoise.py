@@ -7,8 +7,8 @@ Created on Sun Oct  4 19:38:52 2020
 """
 import numpy as np
 from movmean import movmean
-# from movdiff import movdiff
-import matplotlib.pyplot as plt
+from plotting import plotting
+
 def denoise(y,ws,threshold_low=0,threshold_high=0):
 # Find the moving average of the data and filter according to the threshold
 # Restricting the bandwidth of the pitch contour based on the initial pitch estimate
@@ -18,15 +18,13 @@ def denoise(y,ws,threshold_low=0,threshold_high=0):
     if(len(y)>1):
         y_mean = movmean(y,ws) # Moving average of pitch contour
         y_mean = list(filter(lambda x: x!=0, y_mean))
-        plt.figure()
-        plt.plot(y_mean)
-        plt.plot(y_mean)
-        plt.show()
+        
+        plotting(y_mean)
         
         initial_pitch_estimate = np.mean(y_mean)
         
-        threshold_low = initial_pitch_estimate - 30
-        threshold_high = initial_pitch_estimate + 30
+        threshold_low = initial_pitch_estimate - 50
+        threshold_high = initial_pitch_estimate + 50
                     
         for i in range(0,len(y_mean)):
             if (np.abs(y_mean[i]) <= threshold_high):

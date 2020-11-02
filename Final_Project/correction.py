@@ -9,7 +9,7 @@ from numpy import floor
 from numpy import abs as npabs
 
 def correction(pitch,targets):
-# Find the errors, 
+# Find the errors
 # Determine the closest note frequency 
 # Display the corrective action required
     

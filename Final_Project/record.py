@@ -7,6 +7,7 @@ Created on Sat Oct 10 17:47:49 2020
 """
 import pyaudio
 import wave
+from scipy.io import wavfile as wv
 
 def record(duration):
     # the file name output you want to record into
@@ -55,3 +56,7 @@ def record(duration):
     wf.writeframes(b"".join(frames))
     # close the file
     wf.close()
+    
+    fs, data = wv.read('recorded.wav') # Read the recorded audio
+    
+    return fs, data
