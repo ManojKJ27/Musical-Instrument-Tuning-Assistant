@@ -48,8 +48,7 @@ def pitch(targets):
         values = list(cnt.values())
         
         # Plot the Histogram
-        plt.bar(keys,values)
-        plt.show()
+        plotting(keys,values,xlabel="Frequency [Hz]", plot='bar')
         
         if(len(values) and max(values)>1): # Check for empty list and prominenence of frequency signature
             pitch_freq = keys[values.index(max(values))] # Select the most frequent Hz value
