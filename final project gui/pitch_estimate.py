@@ -20,8 +20,8 @@ from plotting import plotting
 def pitch(targets):
     
     """ Audio I/O """
-    fs,data=record(2) # Read audio from the microphone for 2 seconds
-    #fs, data = wv.read('recorded.wav')
+    record(2) # Read audio from the microphone for 2 seconds
+    fs, data = wv.read('recorded.wav')
     """ Digital Highpass filter at 40Hz """
     sos = butter(10, 40/fs, 'hp',output = 'sos')
     data = sosfilt(sos,data)
