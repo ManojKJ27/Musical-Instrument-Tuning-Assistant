@@ -29,14 +29,14 @@ class Music:
              sg.Button('Fast', button_color=(sg.theme_background_color(), sg.theme_background_color()),
                image_filename="fwd.png", image_size=(75, 75), image_subsample=2, border_width=0)]
         ]
-        alpha={'A':0,'B':1,'B#':2,'C':3,'C#':4,"D":5,"D#":6,"E":7,"F":8,"F#":9,"G":10,"G#":11}
-        self.pitch=alpha[self.pitchalpa]
-        self.pathmatrix=[["ViolinA.mp3","ViolinB.mp3","ViolinB#.mp3","ViolinC.mp3","ViolinC#.mp3","ViolinD.mp3","ViolinD#.mp3","ViolinE.mp3","ViolinF.mp3","ViolinF#.mp3","ViolinG.mp3","ViolinG#.mp3"],
-                         ["songA.mp3","songB.mp3","songB#.mp3","songC.mp3","songC#.mp3","songD.mp3","songD#.mp3","songE.mp3","songF.mp3","songF#.mp3","songG.mp3","songG#.mp3"],
-                         ["FluteA.mp3","FluteB.mp3","FluteB#.mp3","FluteC.mp3","FluteC#.mp3","FluteD.mp3","FluteD#.mp3","FluteE.mp3","Flute\MP3\FluteF.mp3","Flute\MP3\FluteF#.mp3","Flute\MP3\FluteG.mp3","Flute\MP3\FluteG#.mp3"]]
+        # alpha={'A':0,'B':1,'B#':2,'C':3,'C#':4,"D":5,"D#":6,"E":7,"F":8,"F#":9,"G":10,"G#":11}
+        # self.pitch=alpha[self.pitchalpa]
+        # self.pathmatrix=[["ViolinA.mp3","ViolinB.mp3","ViolinB#.mp3","ViolinC.mp3","ViolinC#.mp3","ViolinD.mp3","ViolinD#.mp3","ViolinE.mp3","ViolinF.mp3","ViolinF#.mp3","ViolinG.mp3","ViolinG#.mp3"],
+        #                  ["songA.mp3","songB.mp3","songB#.mp3","songC.mp3","songC#.mp3","songD.mp3","songD#.mp3","songE.mp3","songF.mp3","songF#.mp3","songG.mp3","songG#.mp3"],
+        #                  ["FluteA.mp3","FluteB.mp3","FluteB#.mp3","FluteC.mp3","FluteC#.mp3","FluteD.mp3","FluteD#.mp3","FluteE.mp3","Flute\MP3\FluteF.mp3","Flute\MP3\FluteF#.mp3","Flute\MP3\FluteG.mp3","Flute\MP3\FluteG#.mp3"]]
         self.window = sg.Window('Digital Tanpura', self.layout)
     def sound(self):
-        print(self.pitch)
+        print(self.pitchalpa)
         frequency=44100
         count=1
         
@@ -44,11 +44,11 @@ class Music:
             event, values = self.window.read()
             
             if (values['violin']):
-                self.path=0
+                self.path="WAV/Violin "
             elif (values['veena']):
-                self.path=1
+                self.path="WAV/Veena "
             elif(values['Flute']):
-                self.path=2
+                self.path="WAV/Flute "
             if event in ('Quit','WIN_CLOSED'):
                 pygame.mixer.music.stop()
                 
@@ -61,7 +61,7 @@ class Music:
         
                 pygame.mixer.init(frequency)
         
-                pygame.mixer.music.load(self.pathmatrix[self.path][self.pitch])
+                pygame.mixer.music.load(self.path+str(self.pitchalpa)+".wav")
                 
                 pygame.mixer.music.play(-1)
                 

@@ -9,12 +9,13 @@ import pitch_estimate
 from user_input import user_input
 import PySimpleGUI as sg
 from musicplot import Music as dt
-sg.theme('GreenTan')
-layout1 = [
-    [sg.Radio('Digital Tanpura','num',key='option1'),sg.Radio('pitch detection','num',key='option2')],
-    [sg.Text("Enter target Pitch")],
-          [sg.Combo(["A","B","B#","C","C#","D","D#","E","F","F#","G","G#"], size=(20, 3), enable_events=True, key='combo')],
-          [sg.Text("Pitch Analysis",justification="center")],
+
+#container.style['background-image'] = "url('/my_resources:logo.png')"
+sg.theme('TealMono')
+layout1 = [[sg.Image("timber.png")],
+    [sg.Radio('Digital Tanpura','num',size=(13,2),font="Helvitica",key='option1'),sg.Radio('Pitch Detection','num',size=(15,2),font="Helvitica",key='option2'),sg.Text("Enter target Pitch",justification="right",size=(31,1))
+          ,sg.Combo(["A","B","B#","C","C#","D","D#","E","F","F#","G","G#"], size=(20, 3), enable_events=True, key='combo')],
+          [sg.Text("PITCH ANALYSIS",size=(73,1),font="Helvitica",justification="center")],
           [sg.Text(size=(40,1),font="Courier", key='-OUTPUT1-')],
           [sg.Text(size=(25,1),font="Courier", key='-OUTPUT2-'),sg.Text(size=(7,1),font="Courier",text_color="blue", key='-OUTPUT4-')],
 #          [sg.Text(size=(40,1),font="Courier", key='-OUTPUT4-')],
@@ -22,8 +23,8 @@ layout1 = [
           [sg.Text(size=(40,1),font="Courier", key='-OUTPUT6-',justification="right")],
           #[sg.Text(" "*50,size=(29,1)),sg.Text("|"+" "*52+"|"+" "*14+"|"+" "*11+"|"+" "*52+"|",justification='center')],
           #[sg.Text(" "*200,size=(30,1)),sg.Text("Low"+" "*23+" "+" "*25+"High",font="Courier",justification='center')],
-          [sg.Text(size=(20,1)),sg.Button('Ok'),sg.Button('Resume/Pause'),sg.Button('stop'), sg.Quit(),
-          sg.Text(size=(15,1),font="Courier",justification="right", key='-OUTPUT3-')]]
+          [sg.Text(size=(30,1)),sg.Button('Ok'),sg.Button('Resume/Pause'),sg.Button('stop'), sg.Quit(),
+          sg.Text(size=(25,1),font="Courier",justification="right", key='-OUTPUT3-')]]
 
 window1=sg.Window('Pitch Detection',layout1)
 event1,values1=window1.read()
@@ -44,7 +45,7 @@ while(1):
         window1.close()
         break
     if (values1['option1']):
-        print('o1')
+        
         digitalT=dt(values1['combo'])
         digitalT.sound()
         event1,values1=window1.read()
@@ -65,7 +66,7 @@ while(1):
                     pass
                 
                 elif(pitch==0):
-                         window1['-OUTPUT1-'].update('target pitch from user:'+values1['combo'])
+                         window1['-OUTPUT1-'].update('target pitch from user:'+" "*5+values1['combo'])
                          window1['-OUTPUT2-'].update('detecting scilence')
                          #window1['-OUTPUT3-'].update(' ')
                          window1['-OUTPUT4-'].update(' ')
@@ -75,7 +76,7 @@ while(1):
                          window1['-OUTPUT6-'].update("Correct Pitch")
                 
                 else:
-                    window1['-OUTPUT1-'].update('target pitch from user:'+values1['combo'])
+                    window1['-OUTPUT1-'].update('target pitch from user:'+" "*5+values1['combo'])
                     window1['-OUTPUT2-'].update('Pitch of ur instrument :')
                     window1['-OUTPUT4-'].update(str(pitch))
                     #window1['-OUTPUT3-'].update('Target is'+target_str+' '+str(target_pitch))
