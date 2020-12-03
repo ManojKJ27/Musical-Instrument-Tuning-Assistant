@@ -40,10 +40,13 @@ class Music:
         print(self.pitchalpa)
         frequency=44100
         count=1
-        
+        pygame.init()
         while True:
             event, values = self.window.read()
-            pygame
+            
+            while ((values['violin']==False)&(values['veena']==False)&(values['Flute']==False)):
+                sg.popup_ok('Choose Instrument ')
+                event, values = self.window.read()
             if (values['violin']):
                 self.path="WAV/Violin "
             elif (values['veena']):
@@ -58,7 +61,7 @@ class Music:
             elif event == 'Play':
                 #pygame.mixer.pre_init(44100, -16, 2, 2048) # setup mixer to avoid sound lag
                 self.window['-OUTPUT1-'].update(frequency)
-                pygame.init()
+                
                 frequency=44100
                 pygame.mixer.init(frequency)
         

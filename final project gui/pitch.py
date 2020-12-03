@@ -25,14 +25,14 @@ layout1 = [[sg.Image("timber.png")],
           #[sg.Text(" "*200,size=(30,1)),sg.Text("Low"+" "*23+" "+" "*25+"High",font="Courier",justification='center')],
           [sg.Text(size=(30,1)),sg.Button('Ok'),sg.Button('Resume/Pause'),sg.Button('stop'), sg.Quit(),
           sg.Text(size=(25,1),font="Courier",justification="right", key='-OUTPUT3-')]]
-
+sg.popup_ok('Choose 1.Mode of Operation 2.Target Pitch')
 window1=sg.Window('Pitch Detection',layout1)
 event1,values1=window1.read()
 received_input=values1['combo']
 if event1 in ('WIN_CLOSED','Quit','exit',None):
         window1.close()
-        
-targets=user_input(values1)
+#while ((option1=='False')&(option2=='False')):       
+
 #window2=sg.Window('Pitch Analysis',layout2)
 progress_bar1 = window1['progressbar1']
 progress_bar2 = window1['progressbar2']
@@ -40,10 +40,17 @@ progress_bar2 = window1['progressbar2']
 show_pitch,isittuned=True,False
 #digitalT=dt(received_input)
 while(1):
+    while values1['combo'] not in ("A","B","B#","C","C#","D","D#","E","F","F#","G","G#"):
+        sg.popup_ok('Choose Target Pitch')
+        event1,values1=window1.read()
+    targets=user_input(values1)
     #event1,values1=window1.read(timeout=1)
     if event1 in ('WIN_CLOSED','Quit','exit'):
         window1.close()
         break
+    while ((values1['option1']=='False')&(values1['option2']=='False')):
+        sg.popup_ok('Choose mode of Operation')
+        event1,values1=window1.read()
     if (values1['option1']):
         
         digitalT=dt(values1['combo'])
@@ -108,4 +115,5 @@ while(1):
         window1['-OUTPUT3-'].update('Stop',text_color="red")
         event1,values1=window1.read()
     
+        
         
