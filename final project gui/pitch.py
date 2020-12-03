@@ -9,7 +9,7 @@ import pitch_estimate
 from user_input import user_input
 import PySimpleGUI as sg
 from musicplot import Music as dt
-
+ispaused=False
 #container.style['background-image'] = "url('/my_resources:logo.png')"
 sg.theme('TealMono')
 layout1 = [[sg.Image("timber.png")],
@@ -40,6 +40,7 @@ progress_bar2 = window1['progressbar2']
 show_pitch,isittuned=True,False
 #digitalT=dt(received_input)
 while(1):
+    
     while values1['combo'] not in ("A","B","B#","C","C#","D","D#","E","F","F#","G","G#"):
         sg.popup_ok('Choose Target Pitch')
         event1,values1=window1.read()
@@ -57,15 +58,24 @@ while(1):
         digitalT.sound()
         event1,values1=window1.read()
     elif(values1['option2']):
+        sg.theme('DarkGreen5')
         window1['-OUTPUT3-'].update('Play',text_color="green")
         while(1):
-            sg.theme('LightGreen7')
+            
             event1,values1=window1.read(timeout=1)
             if event1 in ('stop','WIN_CLOSED'):
                     break
+            elif event1 in ('Quit'):
+                sg.popup_ok('Click once more to Quit')
+                break
             elif (event1=='Resume/Pause'):
                 window1['-OUTPUT3-'].update('Pause',text_color="yellow")
                 show_pitch=not show_pitch
+                ispaused=True
+            elif (event1=='Ok'):
+                if (ispaused):
+                    show_pitch=not show_pitch
+                    ispaused=False
             if show_pitch:
                 window1['-OUTPUT3-'].update('Play',text_color="green")
                 pitch,target_pitch,target_str,isittuned,correction_value=pitch_estimate.pitch(targets)

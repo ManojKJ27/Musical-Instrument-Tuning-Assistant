@@ -8,7 +8,7 @@ Created on Mon Nov 30 16:24:37 2020
 import PySimpleGUI as sg
 import pygame
 from speedchange import speed
-
+sg.theme('TealMono')
 class Music:
 
     def __init__(self, file):
