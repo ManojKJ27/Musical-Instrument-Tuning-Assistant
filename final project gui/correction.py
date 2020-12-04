@@ -12,11 +12,16 @@ def correction(pitch,targets):
 # Find the errors, 
 # Determine the closest note frequency 
 # Display the corrective action required
-    
+    tolerance = 2
     if(floor(pitch<targets[2])):
         target = targets[0]
-    else:
+    elif(floor(pitch)<targets[4]):
         target = targets[2]
+        tolerance = 6
+    else:
+        target = targets[4]
+        tolerance = 10
+        
         
     # print("Target_base : ",target)
     
@@ -33,7 +38,7 @@ def correction(pitch,targets):
         print("Target is Sa : ",target," Hz")
         target_pitch=target
         pitch_str="Sa"
-        if(abs(Sa_error)<2):
+        if(abs(Sa_error) <= tolerance):
             print("Sa : tuned at ",target,"Hz")
             tuned=True
         else:
@@ -53,7 +58,7 @@ def correction(pitch,targets):
         print("Target is Pa : ",target*3/2," Hz")
         target_pitch=target*3/2
         pitch_str="Pa"
-        if(abs(Pa_error)<2):
+        if(abs(Pa_error) <= tolerance):
             print("Pa : tuned at ",target*3/2,"Hz")
             #strint_in="Pa : tuned at "+str(target*3/2)+"Hz"
             tuned=True
@@ -74,7 +79,7 @@ def correction(pitch,targets):
         print("Target is Sah : ",target*2," Hz")
         target_pitch=target*2
         pitch_str="Sah"
-        if(abs(Sah_error)<2):
+        if(abs(Sah_error) <= tolerance):
             print("Sah : tuned at ",target*2,"Hz")
             #strint_in="Sah : tuned at "+str(target*2)+"Hz"
             tuned=True
