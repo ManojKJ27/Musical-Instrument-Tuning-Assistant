@@ -30,22 +30,23 @@ class Music:
         self.window = sg.Window('Digital Tanpura', self.layout)
     def sound(self):
         print(self.pitchalpa)
-        frequency=44100
+        frequency=1.0
         count=1
         pygame.init()
+        event, values = self.window.read()
         while True:
-            event, values = self.window.read()
+            
             try:
-                print(values['violin'],values['veena'],values['Flute'])
+                while ((values['violin']==False)&(values['veena']==False)&(values['Flute']==False)):
+                    sg.popup_ok('Choose Instrument ')
+                    event, values = self.window.read()
             except :
                 if TypeError:
                     pygame.mixer.music.stop()
                     break
             else:
             
-                while ((values['violin']==False)&(values['veena']==False)&(values['Flute']==False)):
-                    sg.popup_ok('Choose Instrument ')
-                    event, values = self.window.read()
+                
                 if (values['violin']):
                     self.path="WAV/Violin "
                 elif (values['veena']):
@@ -61,8 +62,8 @@ class Music:
                     
                     self.window['-OUTPUT1-'].update(frequency)
                     
-                    frequency=44100
-                    pygame.mixer.init(frequency)
+                    frequency=1
+                    pygame.mixer.init()
             
                     pygame.mixer.music.load(self.path+str(self.pitchalpa)+".wav")
                     
@@ -71,7 +72,7 @@ class Music:
                     
                     
                 elif event=='Slow':
-                    frequency=frequency//2
+                    frequency=frequency/2
                     pygame.mixer.music.load(self.path+str(self.pitchalpa)+".wav")
                     
                     pygame.mixer.music.play(-1)
@@ -79,7 +80,7 @@ class Music:
                     
                     speed(self.path+str(self.pitchalpa)+".wav",frequency)
                     
-                    pygame.mixer.init(frequency)
+                    pygame.mixer.init()
             
                     pygame.mixer.music.load("changed.wav")
                     
@@ -95,7 +96,7 @@ class Music:
                     
                     speed(self.path+str(self.pitchalpa)+".wav",frequency)
                     
-                    pygame.mixer.init(frequency)
+                    pygame.mixer.init()
             
                     pygame.mixer.music.load("changed.wav")
                     
@@ -117,6 +118,7 @@ class Music:
                 except TypeError:
                     pygame.mixer.music.stop()
                     break
+            event, values = self.window.read(timeout=2)
         self.window.close()
                 
                 

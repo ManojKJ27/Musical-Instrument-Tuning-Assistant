@@ -3,19 +3,20 @@
 Created on Thu Dec  3 16:04:48 2020
 
 @author: abhin
+Inputs : Audio file, speed factor (1 - original, 2 - 2x, 0.5 - 0.5x, etc)
+Output : Modified audiofile saved as wav (Best if changed to playback without saving)
 """
-import wave
+import librosa
+import soundfile as sf
+
 def speed(path,speedrate):
-    CHANNELS = 1
-    swidth = 2
+    filename = path
     
-    spf = wave.open(path, 'rb')
-    #RATE=spf.getframerate()
-    signal = spf.readframes(-1)
+    # Modify speed
+    y, sr = librosa.load(filename)
+    speed = speedrate # always non-zero
+    y_fast = librosa.effects.time_stretch(y, speed)
     
-    wf = wave.open('changed.wav', 'wb')
-    wf.setnchannels(CHANNELS)
-    wf.setsampwidth(swidth)
-    wf.setframerate(speedrate)
-    wf.writeframes(signal)
-    wf.close()
+    # Write out audio as 24bit PCM WAV
+    rate = sr
+    sf.write('changed.wav', y_fast, int(rate/1))
