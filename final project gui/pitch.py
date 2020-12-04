@@ -23,8 +23,8 @@ layout1 = [[sg.Image("timber.png")],
           [sg.Text(size=(40,1),font="Courier", key='-OUTPUT6-',justification="right")],
           #[sg.Text(" "*50,size=(29,1)),sg.Text("|"+" "*52+"|"+" "*14+"|"+" "*11+"|"+" "*52+"|",justification='center')],
           #[sg.Text(" "*200,size=(30,1)),sg.Text("Low"+" "*23+" "+" "*25+"High",font="Courier",justification='center')],
-          [sg.Text(size=(30,1)),sg.Button('Ok'),sg.Button('Resume/Pause'),sg.Button('stop'), sg.Quit(),
-          sg.Text(size=(25,1),font="Courier",justification="right", key='-OUTPUT3-')]]
+          [sg.Text(size=(30,1)),sg.Button('Ok',size=(5,1),font="Helvitica"),sg.Button('Pause',size=(5,1),font="Helvitica"),sg.Button('stop',size=(5,1),font="Helvitica"), sg.Quit(size=(5,1),font="Helvitica"),
+          sg.Text(size=(25,1),font="Helvitica",justification="right", key='-OUTPUT3-')]]
 sg.popup_ok('Choose 1.Mode of Operation 2.Target Pitch')
 window1=sg.Window('Pitch Detection',layout1)
 event1,values1=window1.read()
@@ -40,18 +40,24 @@ progress_bar2 = window1['progressbar2']
 show_pitch,isittuned=True,False
 #digitalT=dt(received_input)
 while(1):
-    
-    while values1['combo'] not in ("A","B","B#","C","C#","D","D#","E","F","F#","G","G#"):
-        sg.popup_ok('Choose Target Pitch')
-        event1,values1=window1.read()
-    targets=user_input(values1)
-    #event1,values1=window1.read(timeout=1)
-    if event1 in ('WIN_CLOSED','Quit','exit'):
+    if event1 in (sg.WIN_CLOSED,'Quit','exit'):
         window1.close()
         break
-    while ((values1['option1']=='False')&(values1['option2']=='False')):
-        sg.popup_ok('Choose mode of Operation')
-        event1,values1=window1.read()
+    try:
+        while ((values1['option1']==False)&(values1['option2']==False)):
+            sg.popup_ok('Choose mode of Operation')
+            event1,values1=window1.read()
+        while values1['combo'] not in ("A","B","B#","C","C#","D","D#","E","F","F#","G","G#"):
+            sg.popup_ok('Choose Target Pitch')
+            event1,values1=window1.read()
+    except:
+        if TypeError:
+            window1.close()
+            break
+    targets=user_input(values1)
+    #event1,values1=window1.read(timeout=1)
+    
+    
     if (values1['option1']):
         
         digitalT=dt(values1['combo'])
