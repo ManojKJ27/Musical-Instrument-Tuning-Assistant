@@ -24,7 +24,9 @@ def user_input(values):
         print("Wrong input, terminating program")
         exit()
         
-    target_set = [target_pitch,target_pitch*3/2,target_pitch*2,target_pitch*3,target_pitch*4]
+    target_set = [target_pitch,target_pitch*3/2,target_pitch*2,
+                  target_pitch*3,target_pitch*4,
+                  target_pitch*6, target_pitch*8]
     
     print("Target frequencies : ",target_set)
     
