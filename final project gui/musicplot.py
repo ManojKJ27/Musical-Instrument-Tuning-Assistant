@@ -16,7 +16,7 @@ class Music:
 
 
         self.layout = [[sg.Radio('Violin','num',key='violin'),sg.Radio('Veena','num',key='veena'),sg.Radio('Flute','num',key='Flute')],
-                       [sg.Text(size=(10,1),font="Courier", key='-OUTPUT1-'),sg.Slider((0,100),100,resolution=1,orientation="h",key="Speed")],
+                       [sg.Text(size=(10,1),font="Courier", key='-OUTPUT1-'),sg.Text("volume",font="Courier"),sg.Slider((0,100),100,resolution=1,orientation="h",key="Speed")],
             [sg.Button('Slow', button_color=(sg.theme_background_color(), sg.theme_background_color()),
                image_filename="rwd.png", image_size=(75, 75), image_subsample=2, border_width=0),sg.Button('Play', button_color=(sg.theme_background_color(), sg.theme_background_color()),
                image_filename="play.png", image_size=(75, 75), image_subsample=2, border_width=0), 
