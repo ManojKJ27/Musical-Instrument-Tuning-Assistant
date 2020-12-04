@@ -74,7 +74,7 @@ while(1):
             elif event1 in ('Quit'):
                 sg.popup_ok('Click once more to Quit')
                 break
-            elif (event1=='Resume/Pause'):
+            elif (event1=='Pause'):
                 window1['-OUTPUT3-'].update('Pause',text_color="yellow")
                 show_pitch=not show_pitch
                 ispaused=True
