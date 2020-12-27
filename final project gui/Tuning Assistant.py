@@ -74,7 +74,7 @@ while(1):
             elif event1 in ('Quit'):
                 sg.popup_ok('Click once more to Quit')
                 break
-            elif (event1=='Resume/Pause'):
+            elif (event1=='Pause'):
                 window1['-OUTPUT3-'].update('Pause',text_color="yellow")
                 show_pitch=not show_pitch
                 ispaused=True
@@ -108,13 +108,13 @@ while(1):
                     #else:
                     #    window1['-OUTPUT4-'].update('Correct the Pitch by'+"  "+str(correction_value))
                     window1['-OUTPUT5-'].update("Error")
-                    if (correction_value<0):
+                    if (correction_value<0):    #target is less then pitch(correction_value=target-pitch)
                         progress_bar1.UpdateBar(50)
                         progress_bar2.UpdateBar(abs(correction_value))
                         if (abs(correction_value)<10):
-                            window1['-OUTPUT6-'].update("slight Increase in Pitch")
+                            window1['-OUTPUT6-'].update("slight Decrease in Pitch needed")
                         else:
-                            window1['-OUTPUT6-'].update("high Increase in Pitch")   
+                            window1['-OUTPUT6-'].update("high Decrease in Pitch needed")   
                     elif (correction_value==0):
                         progress_bar1.UpdateBar(50)
                         progress_bar2.UpdateBar(0)
@@ -123,9 +123,9 @@ while(1):
                         progress_bar1.UpdateBar(50-correction_value)
                         progress_bar2.UpdateBar(0)
                         if (abs(correction_value)<10):
-                            window1['-OUTPUT6-'].update("slight Decrease in Pitch")
+                            window1['-OUTPUT6-'].update("slight Increase in Pitch Needed")
                         else:
-                            window1['-OUTPUT6-'].update("high Decrease in Pitch")
+                            window1['-OUTPUT6-'].update("high Increase in Pitch Needed")
         
         #window2.close()
         window1['-OUTPUT3-'].update('Stop',text_color="red")
