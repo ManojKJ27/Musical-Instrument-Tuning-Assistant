@@ -14,7 +14,7 @@ def user_input(values):
     base_pitch_list = [55,58,61,65,69,73,77,82,87,92,98,104];
     shruthi_name = ["A","B","B#","C","C#","D","D#","E","F","F#","G","G#"] ; 
     
-    target_pitch_class = values['combo']
+    target_pitch_class = values
     #target_pitch_class = input("Enter the target pitch : ")
     for i in range(len(shruthi_name)):
         if(target_pitch_class.upper() == shruthi_name[i]):
