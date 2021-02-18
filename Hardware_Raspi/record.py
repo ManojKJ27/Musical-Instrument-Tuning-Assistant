@@ -7,6 +7,11 @@ Created on Sat Oct 10 17:47:49 2020
 """
 import pyaudio
 import wave
+import sys
+
+if not sys.warnoptions:
+    import warnings
+    warnings.simplefilter("ignore")
 
 def record(duration):
     # the file name output you want to record into
