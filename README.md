@@ -42,6 +42,8 @@ Team : Manoj, Vamshi, Abhijith
   - Extracting the resulting pitch 
   - Providing information on corrective action required
 - Preliminary testing showed that the program works very well for veena and violin tuning
+- Digital Tanpura incorporated
+- GUI development and testing completed
  
 # Challenges:  
 - [SOLVED] The execution time (on average) is 3~4 seconds for 1s of audio input. This would make real time implementation difficult
@@ -52,7 +54,5 @@ Team : Manoj, Vamshi, Abhijith
 - Cross validation with auto-correlation method failed due to inconsistency in auto-correlation results
 
 # Tasks pending:
-1. Digital Tanpura
-2. GUI development
-3. Translating code to hardware compatible form
-4. Rigorous testing 
+1. Translating code to hardware compatible form
+2. Rigorous field testing 
