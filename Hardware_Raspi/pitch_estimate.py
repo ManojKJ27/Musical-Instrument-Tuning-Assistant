@@ -33,7 +33,7 @@ def pitch(targets):
     tuned=True
     pitchf=0
     correctitby=0
-    if (rms >=500): # Check if signal is prominent; to avoid processing silence
+    if (rms >=100): # Check if signal is prominent; to avoid processing silence
     
         """ Pitch contour generation """
         contour = pitch_contour('recorded.wav')

@@ -8,6 +8,7 @@ Output : Modified audiofile saved as wav (Best if changed to playback without sa
 """
 import librosa
 import soundfile as sf
+#import wave
 
 def speed(path,speedrate):
     filename = path
@@ -20,3 +21,4 @@ def speed(path,speedrate):
     # Write out audio as 24bit PCM WAV
     rate = sr
     sf.write('changed.wav', y_fast, int(rate/1))
+    

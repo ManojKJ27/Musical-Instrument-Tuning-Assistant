@@ -2,13 +2,21 @@
 import time
 import RPi.GPIO as GPIO
 
+
 LCD_RS = 4
 LCD_E  = 17
-LCD_DATA4 = 18
-LCD_DATA5 = 22
-LCD_DATA6 = 23
-LCD_DATA7 = 24
-
+LCD_DATA4 = 25
+LCD_DATA5 = 8
+LCD_DATA6 = 7
+LCD_DATA7 = 1
+"""
+LCD_RS = 7
+LCD_E  = 11
+LCD_DATA4 = 28
+LCD_DATA5 = 26
+LCD_DATA6 = 24
+LCD_DATA7 = 22
+"""
 LCD_WIDTH = 16 
 LCD_LINE_1 = 0x80 
 LCD_LINE_2 = 0xC0 	
@@ -27,8 +35,9 @@ def lcd_init():
 	GPIO.setup(LCD_DATA7, GPIO.OUT)
 
 	display_init()
+	
 def lcd_send_byte(bits, mode):
-	# Pins auf LOW setzen
+	
 	GPIO.output(LCD_RS, mode)
 	GPIO.output(LCD_DATA4, GPIO.LOW)
 	GPIO.output(LCD_DATA5, GPIO.LOW)
