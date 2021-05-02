@@ -8,7 +8,6 @@ Output : Modified audiofile saved as wav (Best if changed to playback without sa
 """
 import librosa
 import soundfile as sf
-#import wave
 
 def speed(path,speedrate):
     filename = path
