@@ -127,20 +127,17 @@ signal.signal(signal.SIGINT, interrupt.signal_handler)
 #signal.pause()
 def algo():
 	while (True):
-		#print("main working_.........................|||||")
+		
 		if(mode_selected==1):
 			pass
-			#signal.pause()
-			#digi_tanpura.sound()
+			
 		elif (mode_selected==2):
 			realwire()
 		else:
 			values=str(Target_pitch[target_pitch_selected])
 			targets = user_input(str(Target_pitch[target_pitch_selected]))
 
-			#GPIO.add_event_detect(BUTTON_GPIO, GPIO.FALLING,callback=instrument_pressed_callback, bouncetime=100)
-			#signal.signal(signal.SIGINT, interrupt.signal_handler)
-			#signal.raise_signal(signal.SIGINT)
+			
 			pitch,target_pitch,target_str,isittuned,correction_value=pitch_estimate.pitch(targets)
 			LCD.lcd_init()
 
@@ -148,8 +145,7 @@ def algo():
 			print(instruments[instrument_selected]+"  "+str(pitch)+" "+str(Target_pitch[target_pitch_selected]))
 			LCD.lcd_message(instruments[instrument_selected]+"  "+str(pitch)+" "+str(Target_pitch[target_pitch_selected]))
 			LCD.lcd_send_byte(LCD_LINE_2, LCD_CMD)
-			#LCD.lcd_send_byte(0x07, LCD_CMD)
-			#LCD.lcd_string("target_pitch"+(" "*5)+"pitch",1)
+			
 			if (pitch==0):
 				LCD.lcd_message("Silence Detected")	#printing Silence
 			else:			#if not silence then

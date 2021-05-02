@@ -35,32 +35,15 @@ def realwire():
 
 	frames = []
 	start=time.time()
-	# "I think the problem appears from here"------------------------------
-	
-	
-	
-	
 	data_D = stream_D.read(Window_Size)
-#    data_W = stream_W.read(Window_Size)
-	decoded = np.fromstring(data_D, 'float32')
+	#reading data from microphone
+	decoded = np.fromstring(data_D, 'float32') # decoding the read audio
 	end=time.time()
-#    np.savetxt(str(i)+'ttt.txt',transform)
-	sd.play(decoded,22050)
-	#    frames.append(data_W)
-	#-------------------------------------------------------
-	print(end-start,"\n")
+
+	sd.play(decoded,22050)	# Playing the audio
+	print(end-start,"\n") #Printing time to check the latency
 	stream_D.stop_stream()
 	stream_D.close()
 	p.terminate()
 
-#plt.plot(transform)
-#plt.show()
-
-# Save as a wave file---------------------------
-#wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-#wf.setnchannels(CHANNELS)
-#wf.setsampwidth(p.get_sample_size(FORMAT_W))
-#wf.setframerate(Sample_Rate)
-#wf.writeframes(b''.join(frames))
-#wf.close()
 #-------------------------------------------

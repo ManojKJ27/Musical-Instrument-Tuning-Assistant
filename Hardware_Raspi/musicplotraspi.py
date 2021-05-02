@@ -104,8 +104,8 @@ class Music:
 			pygame.mixer.music.stop()
 			print("Fast...",end="\n")
 			start=time.time()
-			speed(self.path+str(target)+".wav",2)
-			tomp3('changed')
+			speed(self.path+str(target)+".wav",frequency) 	#changing the play back speed
+			tomp3('changed')	#converting the .wav file to .mp3
 			end=time.time()
 			pygame.mixer.init()
 			print(end-start," \n Changed...")

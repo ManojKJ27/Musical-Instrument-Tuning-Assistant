@@ -15,7 +15,7 @@ def user_input(values):
     shruthi_name = ["A","B","B#","C","C#","D","D#","E","F","F#","G","G#"] ; 
     
     target_pitch_class = values
-    #target_pitch_class = input("Enter the target pitch : ")
+    
     for i in range(len(shruthi_name)):
         if(target_pitch_class.upper() == shruthi_name[i]):
             target_pitch = base_pitch_list[i]
