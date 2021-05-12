@@ -2,6 +2,7 @@
 import time
 import RPi.GPIO as GPIO
 
+#Assigning gpio pins for each pin
 
 LCD_RS = 4
 LCD_E  = 17
@@ -17,14 +18,16 @@ LCD_DATA5 = 26
 LCD_DATA6 = 24
 LCD_DATA7 = 22
 """
-LCD_WIDTH = 16 
-LCD_LINE_1 = 0x80 
-LCD_LINE_2 = 0xC0 	
-LCD_CHR = GPIO.HIGH
-LCD_CMD = GPIO.LOW
+LCD_WIDTH = 16 			# Width of LCD 16x2
+LCD_LINE_1 = 0x80 	# Address of line 1
+LCD_LINE_2 = 0xC0 	# Address of line 2
+LCD_CHR = GPIO.HIGH		# assigning 1 as data mode for RS pin
+LCD_CMD = GPIO.LOW		# assigning 0 as command mode for RS pin
 E_PULSE = 0.0005
 E_DELAY = 0.0005
 def lcd_init():
+
+	#initializing GPIO Pins
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
 	GPIO.setup(LCD_E, GPIO.OUT)
@@ -43,6 +46,7 @@ def lcd_send_byte(bits, mode):
 	GPIO.output(LCD_DATA5, GPIO.LOW)
 	GPIO.output(LCD_DATA6, GPIO.LOW)
 	GPIO.output(LCD_DATA7, GPIO.LOW)
+	#checking the most significant bits
 	if bits & 0x10 == 0x10:
 	  GPIO.output(LCD_DATA4, GPIO.HIGH)
 	if bits & 0x20 == 0x20:
@@ -60,6 +64,7 @@ def lcd_send_byte(bits, mode):
 	GPIO.output(LCD_DATA5, GPIO.LOW)
 	GPIO.output(LCD_DATA6, GPIO.LOW)
 	GPIO.output(LCD_DATA7, GPIO.LOW)
+	#checking lower significant bits
 	if bits&0x01==0x01:
 	  GPIO.output(LCD_DATA4, GPIO.HIGH)
 	if bits&0x02==0x02:
@@ -77,12 +82,12 @@ def lcd_send_byte(bits, mode):
 def display_init():
 	lcd_send_byte(0x33, LCD_CMD)
 	lcd_send_byte(0x32, LCD_CMD)
-	lcd_send_byte(0x28, LCD_CMD)
-	lcd_send_byte(0x0C, LCD_CMD)  
-	lcd_send_byte(0x06, LCD_CMD)
-	lcd_send_byte(0x01, LCD_CMD)  
+	lcd_send_byte(0x28, LCD_CMD)	# Selecting 4 - bit mode with two rows
+	lcd_send_byte(0x0C, LCD_CMD)	# Display On,Cursor Off, Blink Off 
+	lcd_send_byte(0x06, LCD_CMD)	# Cursor move direction
+	lcd_send_byte(0x01, LCD_CMD)	# Clear display
 
 def lcd_message(message):
-	message = message.ljust(LCD_WIDTH," ")  
+	message = message.ljust(LCD_WIDTH," ")  #left justify the message string
 	for i in range(LCD_WIDTH):
 	  lcd_send_byte(ord(message[i]),LCD_CHR)

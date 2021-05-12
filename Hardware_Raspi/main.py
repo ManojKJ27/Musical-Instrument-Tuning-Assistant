@@ -98,7 +98,7 @@ def slow_callback(channel):
 values=str(Target_pitch[target_pitch_selected])
 targets = user_input(str(Target_pitch[target_pitch_selected]))
 
-
+ #Setting up the GPIO pin for all interrupts and enabling pull up resistors for resp. bits
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_INSTRU_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BUTTON_T_P_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -108,7 +108,7 @@ GPIO.setup(BUTTON_STOP_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BUTTON_FAST_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BUTTON_SLOW_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-
+#assigning the corresponding callback functions to interrupts at falling edges
 GPIO.add_event_detect(BUTTON_INSTRU_GPIO, GPIO.FALLING, 
 	callback=instrument_pressed_callback, bouncetime=500)
 GPIO.add_event_detect(BUTTON_MODE_GPIO, GPIO.FALLING, 
@@ -125,21 +125,24 @@ GPIO.add_event_detect(BUTTON_SLOW_GPIO, GPIO.FALLING,
 	callback=slow_callback, bouncetime=500)
 
 signal.signal(signal.SIGINT, interrupt.signal_handler)
-#signal.pause()
+
 def algo():
 	while (True):
 		
 		if(mode_selected==1):
-			pass
+			pass	#digital tanpura mode
 			
 		elif (mode_selected==2):
-			realwire()
-		else:
+			realwire()		# Real time input output mode
+		else:			#pitch detection mode
 			values=str(Target_pitch[target_pitch_selected])
 			targets = user_input(str(Target_pitch[target_pitch_selected]))
 
 			
-			pitch,target_pitch,target_str,isittuned,correction_value=pitch_estimate.pitch(targets)
+			pitch,target_pitch,target_str,isittuned,correction_value=pitch_estimate.pitch(targets) #main pitch detection function
+
+			#code for changing values on lcd
+
 			LCD.lcd_init()
 
 			LCD.lcd_send_byte(LCD_LINE_1, LCD_CMD)
@@ -167,10 +170,16 @@ def algo():
 				print("target pitch : "+str(values))
 				print("current pitch :"+str(pitch))
 				print("correct value by :"+str(correction_value))
+	LCD.lcd_send_byte(LCD_LINE_1, LCD_CMD)
+	
+	LCD.lcd_message(" "*16)
+	LCD.lcd_send_byte(LCD_LINE_2, LCD_CMD)
+	LCD.lcd_message(" "*16)
+	GPIO.cleanup()
 try:
 
 	algo()
-except KeyboardInterrupt:
+except KeyboardInterrupt:			#to stop the function while using GUI of raspberry pi
 	LCD.lcd_send_byte(LCD_LINE_1, LCD_CMD)
 	
 	LCD.lcd_message(" "*16)
